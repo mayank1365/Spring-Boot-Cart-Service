@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import com.mayank.springbootcartservice.modals.Cart;
 import com.mayank.springbootcartservice.services.CartService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -26,15 +28,7 @@ public class CartController {
         return cartService.getCart(id);
     }
 
-    @GetMapping("/limited/{limit}")
-    public List<Cart> getLimitedCarts(@PathVariable("limit") Long limit) {
-        return cartService.limitedCarts(limit);
-    }
 
-    @GetMapping("/sorted")
-    public List<Cart> getSortedCarts(@PathParam("order") String order) {
-        return cartService.sortedCarts(order);
-    }
 
     @GetMapping("/dateRange")
     public List<Cart> betweenDateRange(@RequestParam("from") String start, @RequestParam("to") String end) {
