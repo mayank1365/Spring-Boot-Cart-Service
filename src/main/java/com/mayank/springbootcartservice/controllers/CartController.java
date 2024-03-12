@@ -35,7 +35,12 @@ public class CartController {
     public List<Cart> getSortedCarts(@PathParam("order") String order) {
         return cartService.sortedCarts(order);
     }
+//    @GetMapping("")
+//    public List<Cart> betweenDateRange(@RequestBody DateGetDTO dateDTO) {
+//        return cartService.inDateRange(dateDTO.getStartDate(), dateDTO.getEndDate());
+//    }
 
+    //     This method bellow is just another way to implement the getListCart between the given date range
     @GetMapping("/dateRange")
     public List<Cart> betweenDateRange(@RequestParam("from") String start, @RequestParam("to") String end) {
         return cartService.inDateRange(start, end);
