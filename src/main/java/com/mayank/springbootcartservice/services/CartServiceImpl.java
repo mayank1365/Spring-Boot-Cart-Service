@@ -48,33 +48,7 @@ public class CartServiceImpl implements  CartService{
         return mapToCart(cartRecieveDTO);
     }
 
-    @Override
-    public List<Cart> limitedCarts(long limit) {
-        List<CartRecieveDTO> cartFetchDTO = restTemplate.exchange(
-                url + "?limit=" + limit,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {}).getBody();
 
-        assert cartFetchDTO != null;
-
-        return cartFetchDTO.stream().map(this::mapToCart).toList();
-    }
-
-    @Override
-    public List<Cart> sortedCarts(String order) {
-
-        List<CartRecieveDTO> cartFetchDTO = restTemplate.exchange(
-                url + "?sort=" + order,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {}).getBody();
-
-        assert cartFetchDTO != null;
-
-        return cartFetchDTO.stream().map(this::mapToCart).toList();
-
-    }
 
     @Override
     public List<Cart> inDateRange(String start, String end) {
@@ -108,8 +82,6 @@ public class CartServiceImpl implements  CartService{
     public void addNewCart(Cart cart) {
         CartRecieveDTO sendCart = mapToCardDTO(cart);
         sendCart = restTemplate.postForObject(url, sendCart, CartRecieveDTO.class);
-
-//        The cart could be returned to the user as well but no need to do that right now
 
     }
 
